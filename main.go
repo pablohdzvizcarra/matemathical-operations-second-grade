@@ -19,8 +19,15 @@ type OperationResult struct {
 
 func main() {
 	files := getFiles()
+	var skip string
 
 	for _, filename := range files {
+		fmt.Printf("Do you to skip the file: %s", filename)
+		_, err := fmt.Scanln(&skip)
+		if skip == "yes" {
+			continue
+		}
+
 		fmt.Printf("Processing the page: %s\n", filename)
 		lines, err := readFileLines(filepath.Join("pages", filename))
 		if err != nil {
